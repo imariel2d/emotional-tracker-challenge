@@ -1,9 +1,10 @@
 const express = require('express');
-const { 
-  getEmotions, 
-  getEmotionById, 
-  createEmotion, 
-  updateEmotion 
+const {
+  getEmotions,
+  getEmotionById,
+  createEmotion,
+  updateEmotion,
+  getMostFrequentEmotion,
 } = require('../controllers/emotionController');
 const { protect } = require('../middlewares/authMiddleware');
 
@@ -13,6 +14,9 @@ const router = express.Router();
 router.route('/')
   .get(protect, getEmotions)
   .post(protect, createEmotion);
+
+router.route('/frequent')
+  .get(protect, getMostFrequentEmotion)
 
 router.get('/:id', getEmotionById);
 

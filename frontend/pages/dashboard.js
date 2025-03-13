@@ -67,14 +67,14 @@ const CardLink = styled.a`
 export default function Dashboard() {
   const { user, loading } = useContext(AuthContext);
   const router = useRouter();
-  
+
   // Basic auth protection
   useEffect(() => {
     if (!loading && !user) {
       router.push('/login');
     }
   }, [loading, user, router]);
-  
+
   if (loading || !user) {
     return (
       <Layout title="Panel - Terapia Emocional">
@@ -82,7 +82,7 @@ export default function Dashboard() {
       </Layout>
     );
   }
-  
+
   return (
     <Layout title="Panel - Terapia Emocional">
       <DashboardContainer>
@@ -90,7 +90,7 @@ export default function Dashboard() {
           <Title>¡Bienvenido, {user.name}!</Title>
           <Subtitle>Aquí tienes un resumen de tu bienestar emocional</Subtitle>
         </WelcomeCard>
-        
+
         <Grid>
           <Card>
             <CardTitle>Seguimiento Emocional</CardTitle>
@@ -101,17 +101,17 @@ export default function Dashboard() {
               Seguimiento de Emociones
             </CardLink>
           </Card>
-          
+
           <Card>
             <CardTitle>Recordatorios</CardTitle>
             <CardText>
               Configura recordatorios para actividades que mejoran tu salud mental.
             </CardText>
-            <CardLink>
-              Próximamente
+            <CardLink onClick={() => router.push('/activities')}>
+              Tus Actividades
             </CardLink>
           </Card>
-          
+
           <Card>
             <CardTitle>Compartir con Terapeuta</CardTitle>
             <CardText>
@@ -122,7 +122,7 @@ export default function Dashboard() {
             </CardLink>
           </Card>
         </Grid>
-        
+
         {/* TODO: Add charts and statistics */}
       </DashboardContainer>
     </Layout>

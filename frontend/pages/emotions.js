@@ -19,30 +19,30 @@ const Title = styled.h1`
 export default function Emotions() {
   const { user, loading } = useContext(AuthContext);
   const router = useRouter();
-  
+
   // Basic auth protection
   useEffect(() => {
     if (!loading && !user) {
       router.push('/login');
     }
   }, [loading, user, router]);
-  
+
   if (loading || !user) {
     return (
-      <Layout title="Emociones - Terapia Emocional">
+      <Layout title="Actividades - Terapia Emocional">
         <p>Cargando...</p>
       </Layout>
     );
   }
-  
+
   return (
-    <Layout title="Emociones - Terapia Emocional">
+    <Layout title="Actividades - Terapia Emocional">
       <EmotionsContainer>
         <Title>Seguimiento Emocional</Title>
-        
+
         <EmotionTracker />
         <EmotionHistory />
-        
+
         {/* TODO: Add functionality to share emotions with therapist */}
       </EmotionsContainer>
     </Layout>

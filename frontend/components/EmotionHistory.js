@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { EmotionContext } from '../context/EmotionContext';
+import { translateEmotion } from '../fixtures/translateEmotion';
 
 const HistoryContainer = styled.div`
   background-color: white;
@@ -77,27 +78,16 @@ const formatDate = (dateString) => {
 
 const EmotionHistory = () => {
   const { emotions, loading, getEmotions } = useContext(EmotionContext);
-  
+
   // Fetch emotions on component mount
   useEffect(() => {
     getEmotions();
   }, []);
-  
-  const translateEmotion = (emotion) => {
-    const translations = {
-      happy: "Feliz",
-      sad: "Triste",
-      angry: "Enojado",
-      anxious: "Ansioso",
-      neutral: "Neutral"
-    };
-    return translations[emotion] || emotion;
-  };
-  
+
   return (
     <HistoryContainer>
       <Title>Historial de Emociones</Title>
-      
+
       {loading ? (
         <p>Cargando...</p>
       ) : emotions.length === 0 ? (
@@ -112,11 +102,11 @@ const EmotionHistory = () => {
                 </EmotionName>
                 <EmotionDate>{formatDate(emotion.date)}</EmotionDate>
               </EmotionHeader>
-              
+
               <EmotionIntensity>
                 Intensidad: <span>{emotion.intensity}/10</span>
               </EmotionIntensity>
-              
+
               {emotion.notes && <EmotionNotes>{emotion.notes}</EmotionNotes>}
             </EmotionCard>
           ))}
